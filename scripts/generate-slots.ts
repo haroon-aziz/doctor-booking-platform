@@ -1,23 +1,9 @@
-/**
- * Env comes from Node's `--env-file-if-exists` flag in the npm script. A
- * `dotenv.config()` call here would run after the static imports below are
- * evaluated, which is too late for `@/lib/config/env`.
- */
+
 import { generateSlots, type AvailabilityRuleInput } from "@/features/booking/services/slot-generator";
 import { env } from "@/lib/config/env";
 import { prisma } from "@/lib/db/prisma";
 import { logger } from "@/lib/logger";
 
-/**
- * Rolls the bookable horizon forward.
- *
- * Slots are materialised rows, not computed on read, so without this the
- * calendar would slowly run out as time passes. Run it nightly.
- *
- * It only ever *adds*: `skipDuplicates` means an existing AVAILABLE, HELD or
- * BOOKED slot at the same (doctor, instant, mode) is left untouched. The job is
- * therefore safe to run repeatedly and cannot disturb a booked appointment.
- */
 
 const HORIZON_DAYS = Number(process.env.SLOT_HORIZON_DAYS ?? 60);
 
