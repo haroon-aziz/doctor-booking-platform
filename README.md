@@ -13,7 +13,7 @@ activate on an environment variable, not a code change.
 ## Quick start
 
 ```bash
-git clone <repo> && cd doctor-booking-platform
+git clone https://github.com/haroon-aziz/doctor-booking-platform.git
 cp .env.example .env                 # defaults work as-is for local development
 npm install
 docker compose up -d                 # Postgres, Redis, Meilisearch, Ollama
