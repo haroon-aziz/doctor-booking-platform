@@ -15,6 +15,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Pin the trace root: a lockfile in a parent directory otherwise makes Next
+  // infer the wrong workspace root.
+  outputFileTracingRoot: __dirname,
   serverExternalPackages: ["pino", "pino-pretty", "@prisma/client"],
   experimental: {
     optimizePackageImports: ["lucide-react", "date-fns"],

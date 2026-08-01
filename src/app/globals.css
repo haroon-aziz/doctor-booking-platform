@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Healthcare theme.
+ *
+ * Teal reads as clinical and calm without the coldness of a pure blue, and the
+ * neutrals are warm-shifted slates so long reading surfaces (doctor bios,
+ * medical records) do not feel harsh. Both palettes are tuned so body text
+ * clears WCAG AA against its own surface.
+ */
+
+@layer base {
+  :root {
+    --background: 180 25% 99%;
+    --foreground: 200 20% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 20% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 20% 12%;
+
+    --primary: 175 78% 28%;
+    --primary-foreground: 180 40% 98%;
+
+    --secondary: 190 40% 95%;
+    --secondary-foreground: 195 45% 22%;
+
+    --muted: 195 25% 95%;
+    --muted-foreground: 200 12% 42%;
+
+    --accent: 168 62% 93%;
+    --accent-foreground: 175 70% 20%;
+
+    --destructive: 358 68% 48%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 58% 34%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 35 88% 46%;
+    --warning-foreground: 30 40% 12%;
+
+    --border: 195 22% 89%;
+    --input: 195 22% 87%;
+    --ring: 175 78% 32%;
+
+    --radius: 0.7rem;
+  }
+
+  .dark {
+    --background: 200 28% 8%;
+    --foreground: 190 20% 94%;
+
+    --card: 200 26% 11%;
+    --card-foreground: 190 20% 94%;
+
+    --popover: 200 26% 11%;
+    --popover-foreground: 190 20% 94%;
+
+    --primary: 172 62% 46%;
+    --primary-foreground: 200 40% 8%;
+
+    --secondary: 200 20% 18%;
+    --secondary-foreground: 190 20% 92%;
+
+    --muted: 200 20% 16%;
+    --muted-foreground: 195 12% 64%;
+
+    --accent: 195 30% 20%;
+    --accent-foreground: 172 60% 76%;
+
+    --destructive: 358 62% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 48% 46%;
+    --success-foreground: 200 40% 8%;
+
+    --warning: 35 80% 56%;
+    --warning-foreground: 30 40% 10%;
+
+    --border: 200 18% 22%;
+    --input: 200 18% 24%;
+    --ring: 172 62% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Never remove focus affordances — only replace them with a clearer one. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  ::selection {
+    @apply bg-primary/20;
+  }
+}
+
+@layer components {
+  /* Soft clinical gradient used behind hero and section headers. */
+  .surface-gradient {
+    background-image:
+      radial-gradient(60rem 30rem at 10% -10%, hsl(var(--accent) / 0.7), transparent 60%),
+      radial-gradient(45rem 25rem at 95% 0%, hsl(var(--primary) / 0.1), transparent 55%);
+  }
+
+  .skeleton-shimmer {
+    @apply relative overflow-hidden bg-muted;
+  }
+
+  .skeleton-shimmer::after {
+    @apply absolute inset-0 -translate-x-full;
+    content: "";
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--foreground) / 0.06),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

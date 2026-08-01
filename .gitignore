@@ -13,6 +13,8 @@ next-env.d.ts
 
 storage/uploads/*
 !storage/uploads/.gitkeep
+storage/mailbox/*
+!storage/mailbox/.gitkeep
 
 npm-debug.log*
 yarn-error.log*
